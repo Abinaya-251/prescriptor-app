@@ -6,7 +6,7 @@ import authRoute from "./routes/auth.js"
 import userRoute from "./routes/user.js"
 import patientRoute from "./routes/patient.js"
 import medicineRoute from "./routes/medicine.js"
-
+import sequenceRoute from "./routes/sequence.js"
 
 const app = express();
 dotenv.config();
@@ -35,6 +35,7 @@ app.use("/api/auth",authRoute);
 app.use("/api/v1/user",userRoute);
 app.use("/api/v1/medicine",medicineRoute);
 app.use("/api/v1/patient",patientRoute);
+app.use("/api/v1/sequence",sequenceRoute);
 
 
 
