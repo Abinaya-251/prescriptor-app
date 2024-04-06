@@ -1,7 +1,7 @@
 import Healthstats from "../models/Healthstats.js";
 import jwt from "jsonwebtoken"
 //create
-export const createHealthstat=async(req,res,next)=>{ 
+export const createHealthstats=async(req,res,next)=>{ 
 const newHealthstat=new Healthstats(req.body)
 try{
 
@@ -14,7 +14,7 @@ res.status(200).json(savedHealthstat);
 }
 
 //update
-export const updateHealthstat=async(req,res,next)=>{ 
+export const updateHealthstats=async(req,res,next)=>{ 
     try{
 
         //const updatedHealthstat=await Healtchstats.findByIdAndUpdate(req.params.id, {$set: req.body},{new:true})
@@ -30,7 +30,7 @@ export const updateHealthstat=async(req,res,next)=>{
 
 }
 //get
-export const getHealthStat=async(req,res,next)=>{ 
+export const getHealthStats=async(req,res,next)=>{ 
     try{
 
         const savedHealthstat=await Healthstats.findOne({$and: [
@@ -46,7 +46,7 @@ export const getHealthStat=async(req,res,next)=>{
     
 }
 //get all
-export const getAllHealthStat=async(req,res,next)=>{ 
+export const getAllHealthStats=async(req,res,next)=>{ 
     try{
 
         const savedHealthstathlist=await Healthstats.find({patID: req.patID})

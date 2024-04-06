@@ -7,7 +7,7 @@ const RoasterSchema = new Schema({
     firstname: { type: String, required:true },
     lastName: { type: String, required:true },
     day:{type:Number},
-    timeslot:[{starthour: Number, startmins:string,endhour: Number, endmins:string}],
+    timeslot:[{starthour: Number, startmins:String,endhour: Number, endmins:String}],
     slottime:{type:Number}
 },
 {timestamps:true}

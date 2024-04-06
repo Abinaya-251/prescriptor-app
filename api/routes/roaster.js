@@ -4,7 +4,7 @@ import {createRoaster} from "../controller/roaster.js"
 import {updateRoaster} from "../controller/roaster.js"
 import {deleteRoaster} from "../controller/roaster.js"
 import {getRoasterByID} from "../controller/roaster.js"
-import {getRoaster} from "../controller/roaster.js"
+import {getRoasters} from "../controller/roaster.js"
 import {verifyToken} from "../utils/verifyToken.js"
 const router=express.Router();
 
@@ -22,6 +22,6 @@ router.delete("/:id",deleteRoaster);
 router.get("/:id",getRoasterByID);
 
 //Get All
-router.get("/",getRoaster);
+router.get("/",getRoasters);
 
 export default router

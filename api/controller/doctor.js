@@ -1,4 +1,3 @@
-
 import Doctor from "../models/Doctor.js";
 import Sequence from "../models/Sequence.js";
 
