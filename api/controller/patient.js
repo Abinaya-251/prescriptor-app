@@ -7,7 +7,8 @@ import jwt from "jsonwebtoken"
 export const createPatient = async (req, res, next) => {
 
     try {
-        const sequence = await Sequence.findOne({ sequenceName: "Patient" });
+        const sequence = await Sequence.findOne({ sequenceName: "patient" });
+        console.log(sequence)    
         const patseqID = sequence.sequenceCurrentNumber + sequence.sequenceIncrementNumber
         sequence.sequenceCurrentNumber=patseqID
         const updatedSequence = await Sequence.findByIdAndUpdate(sequence._id, { $set: sequence }, { new: true })
@@ -25,7 +26,7 @@ export const createPatient = async (req, res, next) => {
 export const updatePatient = async (req, res, next) => {
     try {
 
-        const updatedPatient = await Patient.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true })
+        const updatedPatient = await Patient.findOneAndUpdate({"patID":req.params.id}, { $set: req.body }, { new: true })
         res.status(200).json(updatedPatient);
 
     } catch (err) {
@@ -37,7 +38,7 @@ export const updatePatient = async (req, res, next) => {
 export const deletePatient = async (req, res, next) => {
     try {
 
-        await Patient.findByIdAndDelete(req.params.id)
+        await Patient.findOneAndDelete({"patID":req.params.id})
         res.status(200).json("Patient has been deleted");
 
     } catch (err) {
@@ -49,7 +50,7 @@ export const deletePatient = async (req, res, next) => {
 export const getPatientByID = async (req, res, next) => {
     try {
 
-        const patient = await Patient.findById(req.params.id)
+        const patient = await Patient.findOne({"patID":req.params.id})  
         res.status(200).json(patient);
 
     } catch (err) {

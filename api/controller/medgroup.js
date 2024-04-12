@@ -17,7 +17,7 @@ res.status(200).json(savedMedgroup);
 export const updateMedgroup=async(req,res,next)=>{ 
     try{
 
-        const updatedMedgroup=await Medgroup.findByIdAndUpdate(req.params.id, {$set: req.body},{new:true})
+        const updatedMedgroup=await Medgroup.findOneAndUpdate({"medgroupID":req.params.id}, {$set: req.body},{new:true})
         res.status(200).json(updatedMedgroup);
         
         }catch(err){
@@ -29,7 +29,7 @@ export const updateMedgroup=async(req,res,next)=>{
 export const deleteMedgroup=async(req,res,next)=>{ 
     try{
 
-        await Medgroup.findByIdAndDelete(req.params.id)
+        await Medgroup.findOneAndDelete({"medgroupID":req.params.id})
         res.status(200).json("Medgroup has been deleted");
         
         }catch(err){
@@ -41,7 +41,7 @@ export const deleteMedgroup=async(req,res,next)=>{
 export const getMedgroupByID=async(req,res,next)=>{ 
     try{
 
-        const medgroup=await Medgroup.findById(req.params.id)
+        const medgroup=await Medgroup.findOne({"medgroupID":req.params.id})
         res.status(200).json(medgroup);
         
         }catch(err){

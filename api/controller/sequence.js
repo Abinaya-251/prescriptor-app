@@ -37,3 +37,16 @@ export const createSequence=async(req,res,next)=>{
             }
         
     }
+
+    export const getSequenceByName=async(req,res,next)=>{ 
+        try{
+    
+            const sequence=await Sequence.findOne({"sequenceName":(req.params.id.toLowerCase())})
+            res.status(200).json(sequence);
+            
+            }catch(err){
+                next(err);
+              
+            }
+        
+    }

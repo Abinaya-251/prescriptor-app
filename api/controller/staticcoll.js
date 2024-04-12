@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken"
 //create
 export const addNewAttribute=async(req,res,next)=>{ 
 const newAttribute=new Staticcoll(req.body)
+newAttribute.attributeName.toLowerCase()
 try{
 
 const savedAttribute=await newAttribute.save()
@@ -17,7 +18,7 @@ res.status(200).json(savedAttribute);
 export const updateAttribute=async(req,res,next)=>{ 
     try{
 
-        const updatedAttribute=await Staticcoll.findByIdAndDelete(req.params.id, {$set: req.body},{new:true})
+        const updatedAttribute=await Staticcoll.findOneAndUpdate({"attributeName":req.params.id}, {$set: req.body},{new:true})
         res.status(200).json(updatedAttribute);
         
         }catch(err){
@@ -29,7 +30,7 @@ export const updateAttribute=async(req,res,next)=>{
 export const deleteAttribute=async(req,res,next)=>{ 
     try{
 
-        await Staticcoll.findByIdAndDelete(req.params.id)
+        await Staticcoll.findOneAndDelete({"attributeName":req.params.id})
         res.status(200).json("Attrbute has been deleted");
         
         }catch(err){
@@ -41,7 +42,7 @@ export const deleteAttribute=async(req,res,next)=>{
 export const getAttributeByID=async(req,res,next)=>{ 
     try{
 
-        const attribute=await Staticcoll.findById(req.params.id)
+        const attribute=await Staticcoll.findOne({"attributeName":req.params.id})
         res.status(200).json(attribute);
         
         }catch(err){

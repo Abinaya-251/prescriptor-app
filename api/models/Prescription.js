@@ -5,10 +5,10 @@ const PrescriptionSchema = new Schema({
     drugName: { type: String, required:true,unique:true },
     drugManufacturer: { type: String, required:true },
     drugType:{type:String},
-    drugQuantity:{type:String},
-    doseMorning:{type: String},
-    doseAfternoon:{type: String},
-    doseNight:{type: String}
+    drugQuantity:{type:Number},
+    doseMorning:{type: Number},
+    doseAfternoon:{type: Number},
+    doseNight:{type: Number}
   },
 {timestamps:true}
 

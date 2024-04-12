@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 const MedgroupSchema = new Schema({
     medgroupID:{type:String, required:true,unique:true },
     prescriptionList: [{
-        type: mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.Array,
         ref: 'Prescription'
     }]
     
