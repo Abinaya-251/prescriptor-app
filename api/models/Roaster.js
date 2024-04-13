@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 const RoasterSchema = new Schema({
     roasterID:{ type: Number,unique:true },
     docID:{ type: Number },
-    firstname: { type: String, required:true },
+    firstName: { type: String, required:true },
     lastName: { type: String, required:true },
     day:{type:Number},
     timeslot:[{starthour: Number, startmins:String,endhour: Number, endmins:String}],
