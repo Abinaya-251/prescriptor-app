@@ -6,6 +6,7 @@ import {deleteRoasterByDay} from "../controller/roaster.js"
 import {getRoasterByID} from "../controller/roaster.js"
 import {getRoasters} from "../controller/roaster.js"
 import {getRoasterByIDandDay} from "../controller/roaster.js"
+import {getAppointmentSlotsByDay } from "../controller/roaster.js";
 import {verifyToken} from "../utils/verifyToken.js"
 const router=express.Router();
 
@@ -24,6 +25,9 @@ router.get("/:id",getRoasterByID);
 
 //Get
 router.get("/:id/:day",getRoasterByIDandDay);
+
+//Get
+router.get("/slots/:id/:day",getAppointmentSlotsByDay);
 
 //Get All
 router.get("/",getRoasters);

@@ -14,7 +14,7 @@ import roasterRoute from "./routes/roaster.js"
 import staticcollRoute from "./routes/staticcoll.js"
 import healthstatsRoute from "./routes/healthstats.js"
 import diagnosisRoute from "./routes/diagnosis.js"
-
+import appointmentRoute from "./routes/appointment.js"
 
 
 const app = express();
@@ -52,6 +52,8 @@ app.use("/api/v1/roaster",roasterRoute)
 app.use("/api/v1/healthstats",healthstatsRoute)
 app.use("/api/v1/diagnosis",diagnosisRoute)
 app.use("/api/v1/staticcoll",staticcollRoute)
+app.use("/api/v1/appointment",appointmentRoute)
+app.use("/api/v1/roaster/slot",roasterRoute)
 
 
 app.listen(8800, () => {

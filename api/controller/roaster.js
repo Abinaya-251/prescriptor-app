@@ -1,6 +1,7 @@
 import Roaster from "../models/Roaster.js";
 import Sequence from "../models/Sequence.js";
 import jwt from "jsonwebtoken"
+import timeSlotter from "time-slotter"
 //create
 export const createRoaster=async(req,res,next)=>{ 
 //const newRoaster=new Roaster(req.body)
@@ -19,6 +20,44 @@ try{
   next(err);
 }
 }
+
+
+//Generate appointment Slots for a Doctor
+const getAppointmentSlots=(starthour,startmins,endhour,endmins,slottime)=>{
+    var startTime=""
+    var endTime=""
+    console.log(slottime)
+    if(starthour<10){
+        starthour= "0".concat((starthour).toString())
+    }
+    startTime=starthour.toString().concat(":").concat(startmins)
+    endTime=endhour.toString().concat(":").concat(endmins)
+    console.log(startTime,endTime)
+    return timeSlotter(startTime, endTime, slottime,true)
+        
+}
+//Check available Slots
+//get all slots available for a doctor on a day
+export const getAppointmentSlotsByDay=async(req,res,next)=>{ 
+    try{
+
+        const roaster=await Roaster.findOne({$and:[{docID:req.params.id},{day:req.params.day}]})
+        var slots=[]
+        console.log(roaster)
+        var data =roaster
+        for (var i=0; i<data.timeslot.length; i++){
+            slots.push(getAppointmentSlots(data["timeslot"][i].starthour,data["timeslot"][i].startmins,data["timeslot"][i].endhour,data["timeslot"][i].endmins,roaster.slottime))
+        }
+
+        
+        res.status(200).json(slots);
+        
+        }catch(err){
+        //  res.status(500).json(err)
+        next(err);
+        }
+}
+
 
 //update
 export const updateRoasterByIDandDay=async(req,res,next)=>{ 

@@ -5,6 +5,7 @@ import {updateAppointment} from "../controller/appointment.js"
 import {deleteAppointment} from "../controller/appointment.js"
 import {getAppointmentByID} from "../controller/appointment.js"
 import {getAppointments} from "../controller/appointment.js"
+import {getAppointmentSlotsByDate} from "../controller/appointment.js"
 import {verifyToken} from "../utils/verifyToken.js"
 const router=express.Router();
 
@@ -19,9 +20,12 @@ router.put("/:id",updateAppointment);
 router.delete("/:id",deleteAppointment);
 
 //Get
-router.get("/:id",getAppointmentByID);
+router.get("/:id/:patid",getAppointmentByID);
+
+//Get
+router.get("/docid/:id/:date",getAppointmentSlotsByDate);
 
 //Get All
-router.get("/",getAppointments);
+router.get("/:id",getAppointments);
 
 export default router

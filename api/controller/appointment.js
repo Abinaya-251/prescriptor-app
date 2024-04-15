@@ -1,10 +1,20 @@
 import Appointment from "../models/Appointment.js";
+import Sequence from "../models/Sequence.js";
 import jwt from "jsonwebtoken"
+
+
 //create
 export const createAppointment=async(req,res,next)=>{ 
 const newAppointment=new Appointment(req.body)
 try{
-
+    const sequence = await Sequence.findOne({ sequenceName: "appointment" });
+    console.log(sequence)    
+    const appointmentseqID = sequence.sequenceCurrentNumber + sequence.sequenceIncrementNumber
+    sequence.sequenceCurrentNumber=appointmentseqID
+    const updatedSequence = await Sequence.findByIdAndUpdate(sequence._id, { $set: sequence }, { new: true })
+    
+    newAppointment.appntID=appointmentseqID
+    newAppointment.status="blocked"
 const savedAppointment=await newAppointment.save()
 res.status(200).json(savedAppointment);
 
@@ -38,10 +48,23 @@ export const deleteAppointment=async(req,res,next)=>{
     
 }
 //get
+export const getAppointmentSlotsByDate=async(req,res,next)=>{
+    try{
+
+        const appointment=await Appointment.find({$and:[{docID:req.params.id},{date:req.params.date}]})
+        res.status(200).json(appointment);
+        
+        }catch(err){
+            next(err);
+          
+        }
+     
+}
+//get
 export const getAppointmentByID=async(req,res,next)=>{ 
     try{
 
-        const appointment=await Appointment.findById(req.params.id)
+        const appointment=await Appointment.find({$and:[{docID:req.params.id},{patID:req.params.patid}]})
         res.status(200).json(appointment);
         
         }catch(err){
@@ -50,8 +73,10 @@ export const getAppointmentByID=async(req,res,next)=>{
         }
     
 }
+
+
 //get all
-export const getAppointment=async(req,res,next)=>{ 
+export const getAppointments=async(req,res,next)=>{ 
     try{
 
         const appointments=await Appointment.find({docID:req.param.id})
