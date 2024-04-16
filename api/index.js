@@ -17,6 +17,7 @@ import diagnosisRoute from "./routes/diagnosis.js"
 import appointmentRoute from "./routes/appointment.js"
 
 
+
 const app = express();
 dotenv.config();
 

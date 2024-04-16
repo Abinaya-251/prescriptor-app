@@ -15,9 +15,9 @@ router.post("/",verifyToken, createHealthstats);
 router.put("/:id",updateHealthstats);
 
 //Get
-router.get("/:id",getHealthStats);
+router.get("/:id/:date",getHealthStats);
 
 //Get All
-router.get("/",getAllHealthStats);
+router.get("/:id",getAllHealthStats);
 
 export default router
