@@ -6,6 +6,8 @@ import {deleteAppointment} from "../controller/appointment.js"
 import {getAppointmentByID} from "../controller/appointment.js"
 import {getAppointments} from "../controller/appointment.js"
 import {getAppointmentSlotsByDate} from "../controller/appointment.js"
+import {getAvailableSlotsByDocByDate} from "../controller/appointment.js"
+
 import {verifyToken} from "../utils/verifyToken.js"
 const router=express.Router();
 
@@ -24,6 +26,8 @@ router.get("/:id/:patid",getAppointmentByID);
 
 //Get
 router.get("/docid/:id/:date",getAppointmentSlotsByDate);
+//Get
+router.get("/docid/:id/appoint/:date",getAvailableSlotsByDocByDate);
 
 //Get All
 router.get("/:id",getAppointments);
