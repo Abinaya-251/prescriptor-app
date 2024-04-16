@@ -79,7 +79,7 @@ export const getAppointmentByID = async (req, res, next) => {
 //get available slots
 export const getAvailableSlotsByDocByDate = async (req, res, next) => {
     try {
-        const appointment = await Appointment.find({ $and: [{ docID: req.params.id }, { date: req.params.date }] })
+        const appointment = await Appointment.find({ $and: [{ docID: req.params.id }, { date: req.params.date },{status:{$eq:"blocked"}}] })
         if (appointment != null) {
             const roaster = await Roaster.findOne({ $and: [{ docID: req.params.id }, { day: (new Date(req.params.date)).getDay() }] })
             var slots = []
@@ -156,3 +156,4 @@ export const getAppointments = async (req, res, next) => {
         next(err);
     }
 }
+
