@@ -15,7 +15,7 @@ const DiagnosisSchema = new Schema({
     },
     treatmentNotes: { type: String, required:true },
     prescriptionList: [{
-        type: mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.Array,
         ref: 'Prescription'
     }],
     attachments:{

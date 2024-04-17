@@ -30,7 +30,7 @@ export const updateHealthstats=async(req,res,next)=>{
 
 }
 //get
-export const getHealthStats=async(req,res,next)=>{ 
+export const getHealthStatsByIDandDate=async(req,res,next)=>{ 
     try{
            const savedHealthstat=await Healthstats.findOne({$and: [
             {patID: req.params.id},
@@ -44,11 +44,24 @@ export const getHealthStats=async(req,res,next)=>{
         }
     
 }
+
+//get health stat by ID
+export const getHealthStatsByID=async(req,res,next)=>{ 
+    try{
+        const savedHealthstat=await Healthstats.findById({_id: req.params.id})
+        res.status(200).json(savedHealthstat);
+        
+        }catch(err){
+            next(err);
+          
+        }
+    
+}
 //get all
 export const getAllHealthStats=async(req,res,next)=>{ 
     try{
 
-        const savedHealthstathlist=await Healthstats.find({patID: req.params.patID})
+        const savedHealthstathlist=await Healthstats.find({patID: req.params.patid})
         res.status(200).json(savedHealthstathlist);
         
         }catch(err){
