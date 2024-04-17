@@ -2,12 +2,14 @@ import Appointment from "../models/Appointment.js";
 import Sequence from "../models/Sequence.js";
 import jwt from "jsonwebtoken"
 import Roaster from "../models/Roaster.js";
+import { createError } from "../utils/error.js"
 import {getAppointmentSlots} from "../utils/getAppointmentSlots.js"
 
 
 //create
 export const createAppointment = async (req, res, next) => {
     const newAppointment = new Appointment(req.body)
+    if ((new Date(newAppointment.date) < new Date(new Date().toDateString()))) return next(createError(400, "Appointment Date cannot be earlier than today's date"));
     try {
         const sequence = await Sequence.findOne({ sequenceName: "appointment" });
         console.log(sequence)

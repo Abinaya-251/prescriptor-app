@@ -32,4 +32,5 @@ router.get("/docid/:id/appoint/:date",getAvailableSlotsByDocByDate);
 //Get All
 router.get("/:id",getAppointments);
 
+
 export default router

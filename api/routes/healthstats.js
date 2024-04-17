@@ -21,7 +21,6 @@ router.get("/:id/:date",getHealthStatsByIDandDate);
 //Get
 router.get("/:id",getHealthStatsByID);
 
-
 //Get All
 router.get("/all/patient/:patid",getAllHealthStats);
 

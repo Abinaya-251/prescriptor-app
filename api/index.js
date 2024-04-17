@@ -18,6 +18,7 @@ import appointmentRoute from "./routes/appointment.js"
 
 
 
+
 const app = express();
 dotenv.config();
 
@@ -56,9 +57,18 @@ app.use("/api/v1/staticcoll",staticcollRoute)
 app.use("/api/v1/appointment",appointmentRoute)
 app.use("/api/v1/roaster/slot",roasterRoute)
 
-
 app.listen(8800, () => {
     connect();
     console.log("Connected to backend.");
   });
+ 
 
+  const errorHandler = (error, request, response, next) =>{
+    // Error handling middleware functionality
+    console.log( `error ${error.message}`) // log the error
+    const status = error.status || 400
+    // send back an easily understandable error message to the caller
+    response.status(status).send(error).json()
+  }
+
+  app.use(errorHandler)
